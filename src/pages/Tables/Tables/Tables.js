@@ -25,6 +25,12 @@ export default function Table() {
     }
 
     const {updatedTable} = route.params;
+    console.log(updatedTable.isActive);
+
+    if(!updatedTable.isActive){           //This IF block is to delete orders from closed tables
+      updatedTable.orders=[];
+    }
+    
     const updatedTableIndex = tables.findIndex(t => t.id === updatedTable.id);
     const newTables = [...tables];
     newTables[updatedTableIndex] = updatedTable;

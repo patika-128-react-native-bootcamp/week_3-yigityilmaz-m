@@ -18,10 +18,14 @@ export default function TableUpdate() {
   const navigation = useNavigation();
   const route = useRoute();
   const {table} = route.params;
+  let {price: total} = {price: 0};  //To be ensuring of the base value of a total price
 
-  const {price: total} = table.orders.reduce((p, c) => ({
-    price: p.price + c.price,
-  }));
+
+  if (table.isActive) {
+    ({price: total} = table.orders.reduce((p, c) => ({
+      price: p.price + c.price,
+    })));
+  }
 
   function handleCloseTable() {
     navigation.navigate('TablesPage', {
@@ -35,6 +39,7 @@ export default function TableUpdate() {
         <Text style={styles.name_label}>{table.name}</Text>
         {table.orders.map(mapOrders)}
         <Text style={styles.total}>Total {total} TL</Text>
+        {!table.isActive && <Text>Table Is Already Closed</Text>} 
       </View>
       {table.isActive && (
         <Button title="Close Table" onPress={handleCloseTable} />
