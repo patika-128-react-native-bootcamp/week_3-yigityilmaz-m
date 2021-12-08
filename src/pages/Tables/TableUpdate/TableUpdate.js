@@ -18,7 +18,7 @@ export default function TableUpdate() {
   const navigation = useNavigation();
   const route = useRoute();
   const {table} = route.params;
-  let {price: total} = {price: 0};  //To be ensuring of the base value of a total price
+  let {price: total} = {price: 0};  //To be ensure of the base value of a total price
 
 
   if (table.isActive) {
@@ -39,7 +39,7 @@ export default function TableUpdate() {
         <Text style={styles.name_label}>{table.name}</Text>
         {table.orders.map(mapOrders)}
         <Text style={styles.total}>Total {total} TL</Text>
-        {!table.isActive && <Text>Table Is Already Closed</Text>} 
+        {!table.isActive && <Text>Table Is Already Closed</Text>}
       </View>
       {table.isActive && (
         <Button title="Close Table" onPress={handleCloseTable} />
